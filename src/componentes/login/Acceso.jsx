@@ -7,7 +7,7 @@ import "./estilo/Acceso.css";
 
 function Acceso() {
     return (
-        <div>
+        <div> 
             <Nav />
             <div className='d-flex align-items-center justify-content-center gap-5 my-5'>
                 <div>
