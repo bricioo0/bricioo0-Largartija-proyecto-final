@@ -59,7 +59,7 @@ function RecuperarContrasena() {
           <a href="/Registrarse" className='crear-cuenta-nueva'>Crear Cuenta Nueva</a>
         </div>
       </div>
-      <Footer />
+      <Footer  />
     </div>
   );
 }
