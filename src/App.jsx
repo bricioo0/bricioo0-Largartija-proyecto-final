@@ -5,14 +5,20 @@ import Registrarse from './componentes/login/Registrarse';
 import Home from './componentes/paginas/Home';
 import RecuperarContrasena from './componentes/login/RecuperarContrasena';
 
+
+
 function App() {
   return (
     <Router>
       <Routes>
+        
         <Route path="/" element={<Home />} />
         <Route path="/acceso" element={<Acceso />} />
         <Route path="/registrarse" element={<Registrarse />} />
         <Route path="/recuperar-contrasena" element={<RecuperarContrasena />} />
+        
+
+        
       </Routes>
     </Router>
   );

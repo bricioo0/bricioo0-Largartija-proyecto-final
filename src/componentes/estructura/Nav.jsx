@@ -26,7 +26,7 @@ function Nav() {
                     <ul className='d-flex list-unstyled flex-row gap-2'>
                     <li><Link to="/registrarse">Crear tu cuenta</Link></li>
                     <li><Link to="/acceso">Ingresar</Link></li>
-                        <li><a href="#">Mis compras</a></li>
+                        <li><a href="/Carrito">Mis compras</a></li>
                         <li><img src={Carrito} width="25px" alt="carrito" /></li>
                     </ul>
                 </div>

@@ -1,51 +1,40 @@
-import {createsStore, combineReducers} from "redux"
+import { createStore, combineReducers } from 'redux';
 
 
-const initialProductsState = [
-    { id: 1, name: 'Remera de San Lorenzo', price: 60000, discount: 30000 },
-    { id: 2, name: 'Pantalon negro', price: 50000, discount: 20000 },
-  
-]
+const initialProductsState = {
+  products: [
+    { id: 1, name: 'Remera San Lorenzo', category: 'remeras', price: 90000, discount: 60000, image:"sanlorenzo.png" },
+    { id: 2, name: 'Pantalon negro', category: 'pantalones', price: 50000, discount: 20000, image:"pantalon1.png"},
+    // Otros productos..
+  ],
+};
 
 const initialCartState = [];
-const initialCommentsState = {};
 
-const ADD_TO_CART = 'ADD_TO_CART';
-const POST_COMMENT = 'POST_COMMENT';
 
 function productsReducer(state = initialProductsState, action) {
-    return state;
+  return state;
+}
+
+
+function cartReducer(state = initialCartState, action) {
+  switch (action.type) {
+    case 'ADD_TO_CART':
+      return [...state, action.payload];
+    case 'REMOVE_FROM_CART':
+      return state.filter(item => item.id !== action.payload.id);
+    default:
+      return state;
   }
-
-function cartReducer (state = initialCartState, action){
-    switch (action.type) {
-        case ADD_TO_CART:
-            return [...state, action.payload];
-            default:
-                return state;
-
-    }
 }
 
-function commentsReducer (state = initialCommentsState, action){
-    switch (action.type){
-    case POST_COMMENT:
-        const {productId, comment } = action.payload;
-        return {
-            ...state,
-            [productId]: [...(state[productId] || []), comment],
-          };
-        default:
-          return state;
-}
-}
 
-const rootReducers = combineReducers({
-    products: productsReducer,
-    cart: cartReducer,
-    commnts: commentsReducer
-
+const rootReducer = combineReducers({
+  products: productsReducer,
+  cart: cartReducer,
 });
-const store = createsStore(rootReducers)
 
-export default store; 
+
+const store = createStore(rootReducer);
+
+export default store;
