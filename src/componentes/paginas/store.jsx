@@ -25,7 +25,7 @@ const initialProductsState = {
     { id: 20, name: 'Remera Tussy', category: 'remeras', price: 35000,  image:"remera13.png"},
     { id: 21, name: 'Remera Shato', category: 'remeras', price: 37000,  image:"remera14.jpg"},
     { id: 22, name: 'Remera Azul oscuro', category: 'remeras', price: 21000,  image:"remera15.jpg"},
-    { id: 23, name: 'Remera Michael Jackson', category: 'remeras', price: 45000,  image:"remera16.jpg"},
+    { id: 23, name: 'Chombita negra', category: 'remeras', price: 45000,  image:"reemera16.jpg"},
     { id: 24, name: 'Remera de Tiburon', category: 'remeras', price: 35000,  image:"remera17.jpg"},
     { id: 25, name: 'Remera Paris roja', category: 'remeras', price: 35000,  image:"remera18.jpg"},
     { id: 26, name: 'Remera Bruce Lee', category: 'remeras', price: 25000,  image:"remera19.jpg"},
