@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Grid, Card, CardContent, CardMedia, Typography, Button, Modal, Box } from '@mui/material';
-import "./estilos/remeras.css";
-import "./estilos/modal.css";
+import "./estilos/remeras.css"
+import "./estilos/modal.css"
 import Nav from '../estructura/Nav';
 import Footer from '../estructura/Footer';
 
@@ -84,26 +84,23 @@ function Remeras() {
         )}
       </Grid>
 
+    
       {selectedProduct && (
         <Modal open={open} onClose={handleClose}>
           <Box className="modal-box">
             <div className="modal-content">
-              {/* Imagen del producto a la izquierda */}
-              <div className="image-section">
-                <img
-                  src={`/img/${selectedProduct.image}`}
-                  alt={selectedProduct.name}
-                  className="modal-image"
-                />
-              </div>
-
-              {/* Detalles del producto a la derecha */}
+              <img
+                src={`/img/${selectedProduct.image}`}
+                alt={selectedProduct.name}
+                className="modal-image"
+              />
               <div className="modal-details">
                 <Typography variant="h4">{selectedProduct.name}</Typography>
                 <Typography variant="h6" color="text.secondary">
                   ${selectedProduct.price}
                 </Typography>
 
+                
                 <Typography variant="h6" color="text.secondary">
                   Métodos de pago
                 </Typography>
@@ -127,6 +124,7 @@ function Remeras() {
                   ))}
                 </div>
 
+                
                 <div className="modal-quantity">
                   <Typography>Cantidad:</Typography>
                   <Button onClick={decrementarCantidad}>-</Button>
@@ -148,5 +146,4 @@ function Remeras() {
 }
 
 export default Remeras;
-
 
