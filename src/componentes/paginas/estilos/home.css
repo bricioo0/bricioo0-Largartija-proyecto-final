@@ -1,3 +1,8 @@
 .descuento{
     color: #E76F51;
 }
+.home-image{
+    object-fit: cover;
+    width: 30%;  
+    height: 100px;  
+}

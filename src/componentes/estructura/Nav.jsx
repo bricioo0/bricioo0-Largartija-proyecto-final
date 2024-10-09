@@ -15,6 +15,8 @@ function Nav() {
                     </div>
                     <div>
                         <ul className='d-flex list-unstyled flex-row gap-4 justify-content-center'>
+
+                            <li><Link to="/home">Home</Link></li>
                             <li><Link to="/remeras">Remeras</Link></li>
                             <li><Link to= "/buzos">Buzos</Link></li>
                             <li><Link to="/pantalones">Pantalones</Link></li>

@@ -14,7 +14,7 @@ function App() {
     <Router>
       <Routes>
         
-        <Route path="/" element={<Home />} />
+        <Route path="/home" element={<Home />} />
         <Route path="/acceso" element={<Acceso />} />
         <Route path="/registrarse" element={<Registrarse />} />
         <Route path="/recuperar-contrasena" element={<RecuperarContrasena />} />

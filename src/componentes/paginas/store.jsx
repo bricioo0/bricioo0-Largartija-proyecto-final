@@ -5,7 +5,7 @@ const initialProductsState = {
   products: [
     { id: 1, name: 'Camiseta de San Lorenzo', category: 'remeras', price: 90000, discount: 60000, image:"sanlorenzo.png" },
     { id: 2, name: 'Pantalon negro', category: 'pantalones', price: 50000, discount: 20000, image:"pantalon1.png"},
-    { id: 3, name: 'Remera de Boca', category: 'remeras', price: 70000,  image:"boca9.png"},
+    { id: 3, name: 'Remera de Boca', category: 'remeras', price: 70000, discount:50000,  image:"boca9.png"},
     { id: 4, name: 'Boucher', category: 'remeras', price: 40000, image:"boucher29.jpeg"},
     { id: 5, name: 'Camiseta de Talleres', category: 'remeras', price: 40000,  image:"Camiseta-Talleres-5.jpg"},
     { id: 6, name: 'Camiseta de EDLP', category: 'remeras', price: 20000, image:"edlp 30.jpg"},

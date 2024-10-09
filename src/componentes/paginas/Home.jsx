@@ -28,7 +28,7 @@ function Home() {
               <Card>
                 <CardMedia
                   component="img"
-                  height="140"
+                  className='home-image'
                   image={`/img/${product.image}`} 
                   alt={product.name}
                 />
