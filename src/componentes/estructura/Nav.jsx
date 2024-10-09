@@ -16,9 +16,9 @@ function Nav() {
                     <div>
                         <ul className='d-flex list-unstyled flex-row gap-4 justify-content-center'>
                             <li><Link to="/remeras">Remeras</Link></li>
-                            <li><a href="#">Buzos</a></li>
-                            <li><a href="#">Pantalones</a></li>
-                            <li><a href="#">Zapatillas</a></li>
+                            <li><Link to= "/buzos">Buzos</Link></li>
+                            <li><Link to="/pantalones">Pantalones</Link></li>
+                            <li><Link to="/zapatillas">Zapas</Link></li>
                         </ul>
                     </div>
                 </div>
