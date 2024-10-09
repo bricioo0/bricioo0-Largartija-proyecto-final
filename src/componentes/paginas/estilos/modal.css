@@ -1,4 +1,3 @@
-/* Overlay modal */
 .modal-overlay {
   position: fixed;
   top: 0;
@@ -30,7 +29,7 @@
   align-items: flex-start;
 }
 
-/* Sección de imagen a la izquierda */
+
 .image-section {
   flex: 1;
   padding-right: 20px;
@@ -43,7 +42,6 @@
   max-width: 250px;
 }
 
-/* Sección de detalles a la derecha */
 .modal-details {
   flex: 2;
   display: flex;
@@ -94,7 +92,7 @@
   border-radius: 4px;
 }
 
-/* Responsivo */
+
 @media (max-width: 768px) {
   .modal-box {
       flex-direction: column;
