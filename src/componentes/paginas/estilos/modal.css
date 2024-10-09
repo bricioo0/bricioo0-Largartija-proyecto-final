@@ -1,83 +1,116 @@
+/* Overlay modal */
 .modal-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0, 0, 0, 0.6);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal-box {
+  background: white;
+  padding: 20px;
+  max-width: 800px;
+  width: 90%;
+  border-radius: 8px;
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.modal-content {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+}
+
+/* Sección de imagen a la izquierda */
+.image-section {
+  flex: 1;
+  padding-right: 20px;
+}
+
+.modal-image {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  max-width: 250px;
+}
+
+/* Sección de detalles a la derecha */
+.modal-details {
+  flex: 2;
+  display: flex;
+  flex-direction: column;
+}
+
+.metodos-pago img {
+  width: 60px;
+  margin-right: 10px;
+}
+
+.modal-options {
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
+
+.size-btn {
+  margin: 5px;
+}
+
+.size-btn.seleccionado {
+  border-color: #007bff;
+  background-color: #007bff;
+  color: white;
+}
+
+.modal-quantity {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.modal-quantity button {
+  width: 30px;
+  height: 30px;
+  font-size: 18px;
+  margin: 0 10px;
+}
+
+.buy-now-btn {
+  background-color: #007bff;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  border-radius: 4px;
+}
+
+/* Responsivo */
+@media (max-width: 768px) {
   .modal-box {
-    background: white;
-    padding: 20px;
-    max-width: 600px;
-    width: 90%;
-    border-radius: 8px;
-    text-align: center;
-    position: relative;
+      flex-direction: column;
+      align-items: center;
   }
-  
-  .modal-content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+
+  .image-section {
+      padding-right: 0;
+      margin-bottom: 20px;
   }
-  
+
   .modal-image {
-    max-width: 80%;
-    height: auto;
-    margin-bottom: 20px;
+      max-width: 80%;
   }
-  
+
   .modal-details {
-    text-align: left;
-    width: 100%;
+      width: 100%;
   }
-  
-  .metodos-pago img {
-    width: 60px;
-    margin-right: 10px;
-  }
-  
-  .modal-options {
-    margin-top: 10px;
-    margin-bottom: 20px;
-  }
-  
-  .size-btn {
-    margin: 5px;
-  }
-  
-  .size-btn.seleccionado {
-    border-color: #007bff;
-    background-color: #007bff;
-    color: white;
-  }
-  
-  .modal-quantity {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 20px;
-  }
-  
-  .modal-quantity button {
-    width: 30px;
-    height: 30px;
-    font-size: 18px;
-    margin: 0 10px;
-  }
-  
-  .buy-now-btn {
-    background-color: #007bff;
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    cursor: pointer;
-    font-size: 16px;
-    border-radius: 4px;
-  }
-  
+}
