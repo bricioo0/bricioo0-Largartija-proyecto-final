@@ -5,6 +5,7 @@ import Registrarse from './componentes/login/Registrarse';
 import Home from './componentes/paginas/Home';
 import RecuperarContrasena from './componentes/login/RecuperarContrasena';
 import Remeras from './componentes/paginas/Remeras';
+import Buzos from './componentes/paginas/Buzos';
 
 
 
@@ -18,6 +19,7 @@ function App() {
         <Route path="/registrarse" element={<Registrarse />} />
         <Route path="/recuperar-contrasena" element={<RecuperarContrasena />} />
         <Route path="/remeras" element={<Remeras />} />
+        <Route path="/buzos" element={<Buzos />} />
         
 
         
