@@ -16,9 +16,9 @@ function App() {
     <Router>
       <Routes>
         
-        <Route path="/" element={<Home />} />
+        <Route path="/Home" element={<Home />} />
         <Route path="/acceso" element={<Acceso />} />
-        <Route path="/registrarse" element={<Registrarse />} />
+        <Route path="/" element={<Registrarse />} />
         <Route path="/recuperar-contrasena" element={<RecuperarContrasena />} />
         <Route path="/remeras" element={<Remeras />} />
         <Route path="/buzos" element={<Buzos />} />

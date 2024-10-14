@@ -69,12 +69,16 @@ function Buzos() {
                   <Typography variant="body2" color="text.secondary" className="product-price">
                     ${product.price}
                   </Typography>
+                  <Typography variant="body2" color={product.stock > 0 ? "green" : "red"} className="product-stock">
+                   {product.stock > 0 ? `En stock: ${product.stock}` : "Sin stock"}
+                   </Typography>
                   <Button
                     variant="contained"
                     color="primary"
                     fullWidth
                     className="buy-btn"
                     onClick={() => handleOpen(product)}
+                    disabled={!product.stock}
                   >
                     Comprar
                   </Button>

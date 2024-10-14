@@ -4,15 +4,16 @@ const cors = require("cors");
 const bodyParser = require("body-parser");
 const dotenv = require("dotenv");
 const authRoutes = require("./routes/authRoutes");
+const productRoutes = require("./routes/productRoutes")
 
-dotenv.config(); // Cargar variables de entorno
+dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// Middleware
 app.use(cors());
 app.use(bodyParser.json());
+
 
 
 mongoose
@@ -22,6 +23,8 @@ mongoose
 
 
 app.use("/api", authRoutes);
+
+app.use("/api", productRoutes); // NUEVO
 
 
 app.listen(PORT, () => {
