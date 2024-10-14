@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom'; // Importar useNavigate para redirección
 import Footer from '../estructura/Footer';
 import Nav from '../estructura/Nav';
 import './estilo/RecuperarContrasena.css';
@@ -7,6 +8,7 @@ function RecuperarContrasena() {
   const [correo, setCorreo] = useState("");
   const [mensaje, setMensaje] = useState("");
   const [error, setError] = useState('');
+  const navigate = useNavigate(); 
 
   const manejarEnvio = async (e) => {
     e.preventDefault();
@@ -14,16 +16,21 @@ function RecuperarContrasena() {
     setError('');
 
     try {
-      const response = await fetch('http://localhost:3000/RecuperarContrasena', {
+      
+      const response = await fetch('http://localhost:3000/recuperar-contrasena', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ correo })
+        body: JSON.stringify({ correo }) 
       });
 
+      
       if (response.ok) {
         setMensaje('Se ha enviado un enlace de recuperación a tu correo electrónico.');
+        setTimeout(() => {
+          navigate('/confirmacion'); 
+        }, 3000); 
       } else {
         setError('No se encontró una cuenta con ese correo electrónico.');
       }
@@ -49,17 +56,17 @@ function RecuperarContrasena() {
               className="form-control entrada-cuenta"
               placeholder="Correo electrónico, teléfono o usuario"
               value={correo}
-              onChange={(e) => setCorreo(e.target.value)}
+              onChange={(e) => setCorreo(e.target.value)}  
             />
             <button type="submit" className="btn btn-primary btn-enviar">Enviar enlace de acceso</button>
           </form>
-          {mensaje && <p className="mensaje mt-3">{mensaje}</p>}
-          {error && <p className="text-danger mt-3">{error}</p>}
+          {mensaje && <p className="mensaje mt-3">{mensaje}</p>}  
+          {error && <p className="text-danger mt-3">{error}</p>}  
           <hr className='separador' />
           <a href="/Registrarse" className='crear-cuenta-nueva'>Crear Cuenta Nueva</a>
         </div>
       </div>
-      <Footer  />
+      <Footer />
     </div>
   );
 }
