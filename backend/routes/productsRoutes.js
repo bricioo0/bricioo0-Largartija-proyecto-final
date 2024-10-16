@@ -68,5 +68,18 @@ router.delete("/store/:id", verifyToken, async (req, res) => {
     }
   });
   
+
+  router.get("/store", async (req, res) => {
+    const { name } = req.query; // Obtener el nombre de la consulta
+    try {
+      const products = await Product.find({ name: new RegExp(name, 'i') }); // Búsqueda insensible a mayúsculas/minúsculas
+      res.status(200).json(products);
+    } catch (err) {
+      res.status(500).json({ message: "Error al buscar los productos." });
+    }
+  });
+
+
+
   module.exports = router;
   

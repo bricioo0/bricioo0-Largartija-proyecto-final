@@ -24,7 +24,7 @@ mongoose
 
 app.use("/api", authRoutes);
 
-app.use("/api", productRoutes); // NUEVO
+app.use("/api", productRoutes); 
 
 
 app.listen(PORT, () => {
