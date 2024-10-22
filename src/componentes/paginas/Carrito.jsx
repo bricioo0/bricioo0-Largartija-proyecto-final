@@ -1,36 +1,53 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { List, ListItem, ListItemText, Button, Paper, Typography } from '@mui/material';
+import { removeFromCart, updateQuantity } from '../redux/cartSlice';
+import { Button, Typography, Select, MenuItem } from '@mui/material';
+import { useHistory } from 'react-router-dom';
 
 function Cart() {
   const cart = useSelector((state) => state.cart);
   const dispatch = useDispatch();
+  const history = useHistory();
 
-  const handleRemoveFromCart = (product) => {
-    dispatch({ type: 'REMOVE_FROM_CART', payload: product });
+  const handleRemove = (id) => {
+    dispatch(removeFromCart(id));
+  };
+
+  const handleUpdateQuantity = (id, quantity) => {
+    dispatch(updateQuantity({ id, quantity }));
+  };
+
+  const handleCheckout = () => {
+    history.push('/checkout'); // Redirigir al proceso de pago
   };
 
   return (
-    <Paper style={{ padding: '20px', margin: '20px', backgroundColor: '#f5f5f5' }}>
-      <Typography variant="h4" align="center">Carrito de Compras</Typography>
-      <List>
-        {cart.map((item) => (
-          <ListItem key={item.id} style={{ borderBottom: '1px solid #ddd', marginBottom: '10px' }}>
-            <ListItemText primary={item.name} secondary={`Precio: $${item.discount}`} />
-            <Button 
-              variant="contained" 
-              color="secondary"
-              onClick={() => handleRemoveFromCart(item)}
-            >
-              Eliminar
-            </Button>
-          </ListItem>
-        ))}
-      </List>
-      {cart.length === 0 && (
-        <Typography variant="body1" align="center">Tu carrito está vacío</Typography>
+    <div>
+      <Typography variant="h4">Tu carrito</Typography>
+      {cart.items.length === 0 ? (
+        <Typography variant="h6">El carrito está vacío</Typography>
+      ) : (
+        <>
+          {cart.items.map((item) => (
+            <div key={item.id}>
+              <Typography variant="h6">{item.name}</Typography>
+              <Typography variant="body1">Talla: {item.talla}</Typography>
+              <Typography variant="body1">Precio: ${item.price}</Typography>
+              <Select
+                value={item.quantity}
+                onChange={(e) => handleUpdateQuantity(item.id, e.target.value)}
+              >
+                {[1, 2, 3, 4, 5].map((q) => (
+                  <MenuItem key={q} value={q}>{q}</MenuItem>
+                ))}
+              </Select>
+              <Button onClick={() => handleRemove(item.id)}>Eliminar</Button>
+            </div>
+          ))}
+          <Button onClick={handleCheckout}>Proceder al pago</Button>
+        </>
       )}
-    </Paper>
+    </div>
   );
 }
 

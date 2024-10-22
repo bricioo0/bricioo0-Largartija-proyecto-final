@@ -10,6 +10,7 @@ import Pantalones from './componentes/paginas/Pantalones';
 import Zapatillas from './componentes/paginas/zapatillas';
 import Carrito from  './componentes/paginas/Carrito';
 import ProductManagement from './componentes/paginas/productMangament';
+import Checkout from './componentes/paginas/Checkout';
 
 
 
@@ -27,7 +28,8 @@ function App() {
         <Route path="/pantalones" element={<Pantalones/>} />
         <Route path="/zapatillas" element={<Zapatillas/>} />
         <Route path="/carrito" element={<Carrito/>} />
-        <Route path="/productManagment" element={<ProductManagement/>} />
+        <Route path="/productMangament" element={<ProductManagement/>} />
+        <Route path="/checkout" element={<Checkout />} />
 
         
         

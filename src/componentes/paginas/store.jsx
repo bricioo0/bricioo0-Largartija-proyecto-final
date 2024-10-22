@@ -102,17 +102,15 @@ const initialProductsState = {
 const initialCartState = [];
 
 
-
-
 function productsReducer(state = initialProductsState, action) {
   switch (action.type) {
     case 'SET_SEARCH_QUERY':
       return {
         ...state,
-        searchQuery: action.payload,  
-      }
-      case 'ADD_TO_CART':
-        return { ...state, cart: [...state.cart, action.payload] };
+        searchQuery: action.payload,
+      };
+    case 'ADD_TO_CART':
+      return { ...state, cart: [...state.cart, action.payload] };
     default:
       return state;
   }
@@ -130,14 +128,11 @@ function cartReducer(state = initialCartState, action) {
   }
 }
 
-
 const rootReducer = combineReducers({
   products: productsReducer,
   cart: cartReducer,
 });
 
-
 const store = createStore(rootReducer);
-
 
 export default store;

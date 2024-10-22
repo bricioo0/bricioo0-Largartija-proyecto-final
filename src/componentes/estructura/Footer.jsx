@@ -1,6 +1,7 @@
 import React from 'react'
 import "./estilo/footer.css"
 import Logo from "../../img/logo-lagartija.png";
+import { Link } from 'react-router-dom';
 
 function Footer() {
   return (
@@ -23,7 +24,7 @@ function Footer() {
           <ul>
             <li><a href="#">Contacto</a></li>
             <li><a href="#">Politicas</a></li>
-            <li><a href="#">Envios y devoluciones</a></li>
+            <li><Link to= "/productMangament">envios y devoluciones</Link></li>
           </ul>
         </div>
       </div>

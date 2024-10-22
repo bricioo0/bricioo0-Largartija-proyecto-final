@@ -1,19 +1,22 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 import Logo from "../../img/logo-lagartija.png";
 import Carrito from "../../img/carrito-de-compras.png";
 import "./estilo/nav.css";
 
-const API_URL = 'http://localhost:3000/api';
+const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:3000/api';
 
 function Nav() {
-  const [searchTerm, setSearchTerm] = useState('');
+  const dispatch = useDispatch();
+  const searchQuery = useSelector(state => state.products.searchQuery);
   const [products, setProducts] = useState([]);
 
   const handleSearch = async (e) => {
-    setSearchTerm(e.target.value);
-    if (e.target.value) {
-      const response = await fetch(`${API_URL}/search?name=${e.target.value}`);
+    const query = e.target.value;
+    dispatch({ type: 'SET_SEARCH_QUERY', payload: query });
+    if (query) {
+      const response = await fetch(`${API_URL}/search?name=${query}`);
       const data = await response.json();
       setProducts(data);
     } else {
@@ -25,21 +28,19 @@ function Nav() {
     <header>
       <nav className='h-auto d-flex justify-content-between align-items-center text-light'>
         <img className='m-2' src={Logo} width="100px" alt="Lagartija - Logo" />
-        
-        {/* Buscador */}
+     
         <div className="d-flex flex-column w-50 m-2">
           <div className='mb-3'>
             <input 
-              className="form-control me-2" 
-              type="search" 
-              placeholder="Buscar" 
-              value={searchTerm}
+              className="form-control me-2"
+              type="search"
+              placeholder="Buscar"
+              value={searchQuery}
               onChange={handleSearch}
               aria-label="Search"
             />
           </div>
-
-          {/* Resultados de búsqueda */}
+      
           <div>
             {products.length > 0 && (
               <ul className='list-unstyled'>
@@ -51,8 +52,7 @@ function Nav() {
               </ul>
             )}
           </div>
-
-          {/* Enlaces de navegación */}
+       
           <div>
             <ul className='d-flex list-unstyled flex-row gap-4 justify-content-center'>
               <li><Link to="/home">Home</Link></li>
@@ -63,8 +63,7 @@ function Nav() {
             </ul>
           </div>
         </div>
-
-        {/* Enlaces de cuenta y carrito */}
+ 
         <div className='m-2'>
           <ul className='d-flex list-unstyled flex-row gap-2'>
             <li><Link to="/registrarse">Crear tu cuenta</Link></li>

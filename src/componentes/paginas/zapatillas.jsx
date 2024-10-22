@@ -5,6 +5,10 @@ import "./estilos/zapatillas.css";
 import "./estilos/modal.css";
 import Nav from '../estructura/Nav';
 import Footer from '../estructura/Footer';
+import Logo from  '../../img/icons8-mercado-pago-48.png'
+import Dni from  '../../img/Banco Provincia Cuenta DNI.png'
+import Debito from  '../../img/pngwing.com.png'
+import { Link } from 'react-router-dom';
 
 function Zapatillas() {
   const products = useSelector((state) => state.products.products);
@@ -15,6 +19,7 @@ function Zapatillas() {
   const [cantidad, setCantidad] = useState(1);
   const [tallaSeleccionada, setTallaSeleccionada] = useState('');
   const [modalClass, setModalClass] = useState("");
+  
 
   const handleOpen = (product) => {
     setSelectedProduct(product);
@@ -111,9 +116,9 @@ function Zapatillas() {
                   Métodos de pago
                 </Typography>
                 <div className="metodos-pago">
-                  <img src="/logos/mercadopago.png" alt="Mercado Pago" />
-                  <img src="/logos/cuentadni.png" alt="Cuenta DNI" />
-                  <img src="/logos/debito.png" alt="Débito" />
+                  <img src={Logo} alt="Mercado Pago" />
+                  <img src={Dni} alt="Cuenta DNI" />
+                  <img src={Debito} alt="Débito" />
                 </div>
                 <div className="modal-options">
                   <Typography>Talles:</Typography>
@@ -135,7 +140,9 @@ function Zapatillas() {
                   <Button onClick={incrementarCantidad}>+</Button>
                 </div>
                 <Button variant="contained" color="primary" className="buy-now-btn">
+                  <Link to="/checkout">
                   Comprar ahora
+                  </Link>
                 </Button>
               </div>
             </div>
