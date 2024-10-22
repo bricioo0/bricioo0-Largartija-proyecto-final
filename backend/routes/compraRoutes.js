@@ -44,6 +44,7 @@ router.post('/compra', async (req, res) => {
     console.error('Error en el proceso de pago:', error);
     res.status(500).json({ success: false, message: 'Error procesando la compra' });
   }
+  
 });
 
 module.exports = router;

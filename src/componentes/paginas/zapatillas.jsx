@@ -140,7 +140,7 @@ function Zapatillas() {
                   <Button onClick={incrementarCantidad}>+</Button>
                 </div>
                 <Button variant="contained" color="primary" className="buy-now-btn">
-                  <Link to="/checkout">
+                  <Link to="/chekout">
                   Comprar ahora
                   </Link>
                 </Button>

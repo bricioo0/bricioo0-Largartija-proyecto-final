@@ -10,7 +10,7 @@ import Pantalones from './componentes/paginas/Pantalones';
 import Zapatillas from './componentes/paginas/zapatillas';
 import Carrito from  './componentes/paginas/Carrito';
 import ProductManagement from './componentes/paginas/productMangament';
-import Checkout from './componentes/paginas/Checkout';
+import Chekout from './componentes/paginas/Chekout';
 
 
 
@@ -29,7 +29,7 @@ function App() {
         <Route path="/zapatillas" element={<Zapatillas/>} />
         <Route path="/carrito" element={<Carrito/>} />
         <Route path="/productMangament" element={<ProductManagement/>} />
-        <Route path="/checkout" element={<Checkout />} />
+        <Route path="/chekout" element={<Chekout />} />
 
         
         
