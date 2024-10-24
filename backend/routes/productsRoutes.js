@@ -74,15 +74,21 @@ router.delete("/store/:id", verifyToken, async (req, res) => {
   }
 });
 
-// Ruta de búsqueda
-router.get("/nav", async (req, res) => {
-  const { name } = req.query;
+
+router.get("/search", async (req, res) => {
+  const { query } = req.query;
   try {
-    const products = await Product.find({ name: new RegExp(name, 'i') });
+    const products = await Product.find({
+      $or: [
+        { name: { $regex: query, $options: "i" } },
+        { category: { $regex: query, $options: "i" } },
+      ],
+    });
     res.status(200).json(products);
   } catch (err) {
-    res.status(500).json({ message: "Error al buscar los productos." });
+    res.status(500).json({ message: "Error al buscar productos." });
   }
 });
 
 module.exports = router;
+

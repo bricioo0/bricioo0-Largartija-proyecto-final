@@ -1,16 +1,55 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { Grid, Card, CardContent, CardMedia, Typography, Button, Modal, Box } from '@mui/material';
 import Footer from '../estructura/Footer';
 import Nav from '../estructura/Nav';
-import { useSelector, useDispatch } from 'react-redux';
-import { Grid, Card, CardContent, CardMedia, Typography, Button } from '@mui/material';
 import BannerGeneral from "../../img/banner-general.png";
+import "./estilos/modal.css";  
+import Logo from  '../../img/icons8-mercado-pago-48.png'
+import Dni from  '../../img/Banco Provincia Cuenta DNI.png'
+import Debito from  '../../img/pngwing.com.png'
+import { Link } from 'react-router-dom';
 
 function Home() {
-  const products = useSelector(state => state.products.products);  // Obtener productos del store
+  const products = useSelector(state => state.products.products);  
   const dispatch = useDispatch();
 
   // Filtrar productos que están en oferta (tienen un descuento)
   const offerProducts = products.filter(product => product.discount < product.price);
+
+  const [selectedProduct, setSelectedProduct] = useState(null);
+  const [open, setOpen] = useState(false);
+  const [cantidad, setCantidad] = useState(1);
+  const [tallaSeleccionada, setTallaSeleccionada] = useState('');
+  const [modalClass, setModalClass] = useState("");
+
+  const handleOpen = (product) => {
+    setSelectedProduct(product);
+    setCantidad(1);
+    setTallaSeleccionada('');
+    setModalClass("");
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setModalClass("modal-exit");
+    setTimeout(() => {
+      setOpen(false);
+      setSelectedProduct(null);
+    }, 300);
+  };
+
+  const incrementarCantidad = () => {
+    setCantidad(cantidad + 1);
+  };
+
+  const decrementarCantidad = () => {
+    if (cantidad > 1) setCantidad(cantidad - 1);
+  };
+
+  const seleccionarTalla = (talla) => {
+    setTallaSeleccionada(talla);
+  };
 
   const handleAddToCart = (product) => {
     dispatch({ type: 'ADD_TO_CART', payload: product });
@@ -18,35 +57,42 @@ function Home() {
 
   return (
     <div>
-        <Nav/>
+      <Nav />
       <img src={BannerGeneral} width={"100%"} height={"300"} alt="banner" />
       <h1>Ofertas</h1>
-      <Grid container spacing={2}>
-      {offerProducts && offerProducts.length > 0 ? (
+      <Grid container spacing={4} className="grid-container">
+        {offerProducts && offerProducts.length > 0 ? (
           offerProducts.map((product) => (
-            <Grid item key={product.id} xs={12} sm={6} md={4}>
-              <Card>
+            <Grid item key={product.id} xs={12} sm={6} md={4} className="grid-item">
+              <Card className="product-card">
                 <CardMedia
                   component="img"
-                  className='home-image'
-                  image={`/img/${product.image}`} 
+                  height="300"
+                  image={`/img/${product.image}`}
                   alt={product.name}
+                  className="product-image"
                 />
-                <CardContent>
-                  <Typography gutterBottom variant="h5" component="div">
+                <CardContent className="product-content">
+                  <Typography gutterBottom variant="h5" component="div" className="product-name">
                     {product.name}
                   </Typography>
-                  <Typography variant="body2" color="text.secondary">
+                  <Typography variant="body2" color="text.secondary" className="product-price">
                     <span className='text-decoration-line-through'>
-                      ${product.price} {/* Precio original */}
-                    </span> ${product.discount} {/* Precio con descuento */}
+                      ${product.price}
+                    </span> ${product.discount}
                   </Typography>
-                  <Button 
-                    variant="contained" 
+                  <Typography variant="body2" color={product.stock > 0 ? "green" : "red"} className="product-stock">
+                    {product.stock > 0 ? `En stock: ${product.stock}` : "Sin stock"}
+                  </Typography>
+                  <Button
+                    variant="contained"
                     color="primary"
-                    onClick={() => handleAddToCart(product)}
+                    fullWidth
+                    className="buy-btn"
+                    onClick={() => handleOpen(product)}
+                    disabled={!product.stock}
                   >
-                    Agregar al carrito
+                    Comprar
                   </Button>
                 </CardContent>
               </Card>
@@ -58,9 +104,68 @@ function Home() {
           </Typography>
         )}
       </Grid>
-      <Footer/>
+
+      {/* Modal para mostrar detalles del producto seleccionado */}
+      {selectedProduct && (
+        <Modal open={open} onClose={handleClose}>
+          <Box className={`modal-box ${modalClass}`}>
+            <div className="modal-content">
+              <img
+                src={`/img/${selectedProduct.image}`}
+                alt={selectedProduct.name}
+                className="modal-image"
+              />
+              <div className="modal-details">
+                <Typography variant="h4">{selectedProduct.name}</Typography>
+                <Typography variant="h6" color="text.secondary">
+                  ${selectedProduct.discount} <span className='text-decoration-line-through'>${selectedProduct.price}</span>
+                </Typography>
+                <Typography variant="h6" color="text.secondary">
+                  Métodos de pago
+                </Typography>
+                <div className="metodos-pago">
+                <img src={Logo} alt="Mercado Pago" />
+                  <img src={Dni} alt="Cuenta DNI" />
+                  <img src={Debito} alt="Débito" />
+                </div>
+                <div className="modal-options">
+                  <Typography>Talles:</Typography>
+                  {['S', 'M', 'L', 'XL'].map((talla) => (
+                    <Button
+                      key={talla}
+                      variant="outlined"
+                      className={`size-btn ${tallaSeleccionada === talla ? 'seleccionado' : ''}`}
+                      onClick={() => seleccionarTalla(talla)}
+                    >
+                      {talla}
+                    </Button>
+                  ))}
+                </div>
+                <div className="modal-quantity">
+                  <Typography>Cantidad:</Typography>
+                  <Button onClick={decrementarCantidad}>-</Button>
+                  <input type="text" value={cantidad} readOnly />
+                  <Button onClick={incrementarCantidad}>+</Button>
+                </div>
+                <Button 
+                  variant="contained" 
+                  color="primary" 
+                  className="buy-now-btn" 
+                  onClick={() => handleAddToCart(selectedProduct)}
+                >
+                  <Link to="/chekout">
+                  Comprar ahora
+                  </Link>
+                </Button>
+              </div>
+            </div>
+          </Box>
+        </Modal>
+      )}
+      <Footer />
     </div>
   );
 }
 
 export default Home;
+

@@ -21,6 +21,7 @@ router.post('/compra', async (req, res) => {
 
     let paymentUrl = '';
 
+    // Manejar el pago según el método seleccionado
     if (metodoPago === 'MercadoPago') {
       const preference = {
         items: productos.map((item) => ({
@@ -36,15 +37,18 @@ router.post('/compra', async (req, res) => {
         auto_return: 'approved',
       };
       const response = await MercadoPago.preferences.create(preference);
-      paymentUrl = response.body.init_point; // URL para redirigir al pago
+      paymentUrl = response.body.init_point; // URL para redirigir al pago en MercadoPago
     }
 
+    // Puedes agregar más lógica aquí para manejar otros métodos de pago
+
+    // Enviar la URL de la pasarela de pago
     res.status(200).json({ success: true, paymentUrl });
   } catch (error) {
     console.error('Error en el proceso de pago:', error);
     res.status(500).json({ success: false, message: 'Error procesando la compra' });
   }
-  
 });
 
 module.exports = router;
+

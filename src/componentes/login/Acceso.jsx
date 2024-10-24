@@ -10,23 +10,23 @@ function Acceso() {
     const [correo, setCorreo] = useState("");
     const [contrasena, setContrasena] = useState("");
     const [mensajeError, setMensajeError] = useState("");
-    
+
     const navigate = useNavigate(); 
 
-    
     const manejarAcceso = async (e) => {
         e.preventDefault();
         setMensajeError(''); 
     
         try {
+            
             const response = await fetch('http://localhost:3000/api/acceso', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({
-                    email: correo,
-                    password: contrasena,
+                    email: correo,  
+                    password: contrasena, 
                 }),
             });
     
@@ -36,14 +36,14 @@ function Acceso() {
                 navigate('/Home'); 
             } else {
                 const errorData = await response.json();
-                setMensajeError(errorData.message);  
+                setMensajeError(errorData.message || 'Error al iniciar sesión.');  
             }
         } catch (error) {
             console.error("Error en la solicitud:", error);
             setMensajeError("Ocurrió un error. Intenta nuevamente.");
         }
     };
-    
+
     return (
         <div> 
             <Nav />
@@ -62,6 +62,7 @@ function Acceso() {
                                 placeholder="Email" 
                                 value={correo}
                                 onChange={(e) => setCorreo(e.target.value)} 
+                                required
                             />
                         </div>
                         <div className="mb-3">
@@ -73,6 +74,7 @@ function Acceso() {
                                 placeholder="Contraseña"
                                 value={contrasena}
                                 onChange={(e) => setContrasena(e.target.value)} 
+                                required
                             />
                         </div>
                         {mensajeError && <p className="text-danger">{mensajeError}</p>}
@@ -94,3 +96,4 @@ function Acceso() {
 }
 
 export default Acceso;
+

@@ -28,4 +28,3 @@ app.use('/api', confirmacionRoutes);
 app.listen(PORT, () => {
   console.log(`Servidor corriendo en el puerto ${PORT}`);
 });
-

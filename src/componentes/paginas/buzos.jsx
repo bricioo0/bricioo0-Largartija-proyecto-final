@@ -5,6 +5,10 @@ import "./estilos/buzos.css"
 import "./estilos/modal.css"
 import Nav from '../estructura/Nav';
 import Footer from '../estructura/Footer';
+import Logo from  '../../img/icons8-mercado-pago-48.png'
+import Dni from  '../../img/Banco Provincia Cuenta DNI.png'
+import Debito from  '../../img/pngwing.com.png'
+import { Link } from 'react-router-dom';
 
 function Buzos() {
   const products = useSelector((state) => state.products.products);
@@ -112,9 +116,9 @@ function Buzos() {
                   Métodos de pago
                 </Typography>
                 <div className="metodos-pago">
-                  <img src="/logos/mercadopago.png" alt="Mercado Pago" />
-                  <img src="/logos/cuentadni.png" alt="Cuenta DNI" />
-                  <img src="/logos/debito.png" alt="Débito" />
+                <img src={Logo} alt="Mercado Pago" />
+                  <img src={Dni} alt="Cuenta DNI" />
+                  <img src={Debito} alt="Débito" />
                 </div>
 
                 <div className="modal-options">
@@ -139,7 +143,9 @@ function Buzos() {
                 </div>
 
                 <Button variant="contained" color="primary" className="buy-now-btn">
+                <Link to="/chekout">
                   Comprar ahora
+                  </Link>
                 </Button>
               </div>
             </div>
