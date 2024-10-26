@@ -85,7 +85,7 @@ function Acceso() {
                             <Link to="/recuperar-contrasena" className="text-primary">Olvidé mi contraseña</Link>
                         </div>
                         <div className='col'>
-                            <button className='button2 px-4 py-2 rounded-pill w-100 text-light border-0'>Crear cuenta</button>
+                            <Link  to="/Home" className='button2 px-4 py-2 rounded-pill w-100 text-light border-0'>Crear cuenta</Link>
                         </div>
                     </div>
                 </div>

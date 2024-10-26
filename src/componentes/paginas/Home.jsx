@@ -14,7 +14,7 @@ function Home() {
   const products = useSelector(state => state.products.products);  
   const dispatch = useDispatch();
 
-  // Filtrar productos que están en oferta (tienen un descuento)
+
   const offerProducts = products.filter(product => product.discount < product.price);
 
   const [selectedProduct, setSelectedProduct] = useState(null);

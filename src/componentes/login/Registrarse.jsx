@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Footer from '../estructura/Footer';
 import Nav from '../estructura/Nav';
 import "./estilo/registrarse.css";
+
 
 const Registrarse = () => {
     const [correo, setCorreo] = useState('');
@@ -95,7 +96,7 @@ const Registrarse = () => {
                         <input type="number" className="form-control" id="codigoPostal" value={codigoPostal} onChange={(e) => setCodigoPostal(e.target.value)} required />
                     </div>
                     <div className='col'>
-                        <button type="submit" className='button2 px-4 py-2 rounded-pill w-100 text-light border-0'>Crear cuenta</button>
+                        <button type="submit" className='button2 px-4 py-2 rounded-pill w-100 text-light border-0'><Link to="/Home">Crear cuenta</Link></button>
                     </div>
                 </form>
             </div>

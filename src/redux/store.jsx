@@ -1,3 +1,4 @@
+
 import { createStore, combineReducers } from 'redux';
 
 
@@ -81,12 +82,45 @@ const initialProductsState = {
     {id:76, name: 'buzo negro canguro', category: 'buzos', price: 21000, image: 'buzos48.jpeg', stock: true  }, 
     {id:77, name: 'Buzo gris peluche', category: 'buzos', price: 37000, image: 'buzos49.jpeg', stock: true  }, 
     {id:78, name: 'Buzo nike negro simple', category: 'buzos', price: 30000, image: 'buzos50.jpeg', stock: true  }, 
-    {id:79, name: '', category: 'pantalones', price: 31000, image: '', stock: true  }, 
-    {id:80, name: '', category: 'pantaloes', price: 31000, image: '' , stock: true }, 
-    { id: 81, name: 'Pantalón gris', category: 'pantalones', price: 55000, image: 'pantalon2.jpg', stock: true },
-
-    
-
+    {id:79, name: 'Cargo negro', category: 'pantalones', price: 31000, image: 'pantalon2.jpg', stock: true  }, 
+    {id:80, name: 'jean largo azul', category: 'pantaloes', price: 31000, image: 'pantalon3.jpg' , stock: true }, 
+    { id: 81, name: 'Pantalón de Boca', category: 'pantalones', price: 55000, image: 'pantalon4.jpg', stock: true },
+    { id: 82, name: 'Pantalón de River', category: 'pantalones', price: 55000, image: 'pantalon6.jpg', stock: true },
+    { id: 83, name: 'Cargo crema', category: 'pantalones', price: 55000, image: 'pantalon8.jpeg', stock: true },
+    { id: 84, name: 'pantalon azuel de vestir', category: 'pantalones', price: 55000, image: 'pantalon9.jpg', stock: true },
+    { id: 85, name: '', category: 'pantalones', price: 55000, image: 'pantalon10.jpg', stock: true },
+    { id: 86, name: 'Pantalon de adidas rojo', category: 'pantalones', price: 55000, image: 'pantalon11.jpg', stock: true },
+    { id: 87, name: 'Pantalon deportivo negro', category: 'pantalones', price: 55000, image: 'pantalon12.jpeg', stock: true },
+    { id: 88, name: 'Pantalón umbro deportivo', category: 'pantalones', price: 55000, image: 'pantalon13.jpg', stock: true },
+    { id: 89, name: 'Pantalon de vestir crema', category: 'pantalones', price: 55000, image: 'pantalon14.jpg', stock: true },
+    { id: 90, name: 'Jean negro', category: 'pantalones', price: 55000, image: 'pantalon15.jpg', stock: true },
+    { id: 91, name: 'Jean gris', category: 'pantalones', price: 55000, image: 'pantalon16.jpg', stock: true },
+    { id: 92, name: 'Jean negro', category: 'pantalones', price: 55000, image: 'pantalon17.jpg', stock: true },
+    { id:93, name: 'Pantalon negro de adidas', category: 'pantalones', price: 55000, image: 'pantalon18.jpg', stock: true },
+    { id: 94, name: 'Cargo negro', category: 'pantalones', price: 55000, image: 'pantalon19.jpg', stock: true },
+    { id: 95, name: 'Pantalón adidas marron', category: 'pantalones', price: 55000, image: 'pantalon20.jpg', stock: true },
+    { id: 96, name: 'Pantalón corto rosa', category: 'pantalones', price: 55000, image: 'pantalon21.jpg', stock: true },
+    { id: 97, name: 'Bermuda gris', category: 'pantalones', price: 55000, image: 'pantalon22.jpeg', stock: true },
+    { id: 98, name: 'Pantalón corto negro', category: 'pantalones', price: 55000, image: 'pantalon23.jpg', stock: true },
+    { id: 99, name: 'Pantalón  corto de Boca', category: 'pantalones', price: 55000, image: 'pantalon24.jpg', stock: true },
+    { id: 100, name: 'Pantalón corto blanco', category: 'pantalones', price: 55000, image: 'pantalon25.jpg', stock: true },
+    { id: 101, name: 'Bermuda gri con estampado', category: 'pantalones', price: 55000, image: 'pantalon26.jpg', stock: true },
+    { id: 102, name: 'joggin coeto blanco', category: 'pantalones', price: 55000, image: 'pantalon27.jpg', stock: true },
+    { id: 103, name: 'Cargo marronciti', category: 'pantalones', price: 55000, image: 'pantalon28.jpg', stock: true },
+    { id: 104, name: 'joggin rojo', category: 'pantalones', price: 55000, image: 'pantalon29.jpg', stock: true },
+    { id: 105, name: 'bermuda azul', category: 'pantalones', price: 55000, image: 'pantalon30.jpg', stock: true },
+    { id: 106, name: 'Pantalones deportivos', category: 'pantalones', discount:55000  ,image: 'pantalon31.jpg', stock: true },
+    { id: 107, name: 'pantalon bike negro', category: 'pantalones', price: 55000, image: 'pantalon32.jpeg', stock: true },
+    { id: 108, name: 'Pantalón corto adidas ', category: 'pantalones', price: 55000, image: 'pantalon33.jpeg', stock: true },
+    { id: 109, name: 'Pantalón corto adidas', category: 'pantalones', price: 55000, image: 'pantalon34.jpeg', stock: true },
+    { id: 110, name: 'Pantalón corto de argentina', category: 'pantalones', price: 55000, image: 'pantalon35.jpeg', stock: true },
+    { id: 111, name: 'Pantalón corto deportivo', category: 'pantalones', price: 55000, image: 'pantalon36.jpg', stock: true },
+    { id: 112, name: 'Pantalón corto de argentina suplente', category: 'pantalones', price: 55000, image: 'pantalon37.jpeg', stock: true },
+    { id: 113, name: 'Pantalón corto de velez', category: 'pantalones', price: 55000, image: 'pantalon38.jpg', stock: true },
+    { id: 114, name: 'Pantalón corto de sacachispas', category: 'pantalones', price: 55000, image: 'pantalon39.jpg', stock: true },
+    { id: 115, name: 'Pantalón corto de psg', category: 'pantalones', price: 55000, image: 'pantalon40.jpeg', stock: true },
+    {id: 116, name: 'zapas jordan', category: 'zapatillas', price: 40000, image:'zapa1.jpg', stock: true },
+    {id: 116, name: 'pumas negras', category: 'zapatillas', price: 40000, image:'zapa2.jpg', stock: true },
 
 
 
