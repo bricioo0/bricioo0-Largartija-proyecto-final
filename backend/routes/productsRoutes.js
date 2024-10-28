@@ -1,7 +1,7 @@
 const express = require("express");
+const router = express.Router();
 const Product = require("../models/Product");
 const jwt = require("jsonwebtoken");
-const router = express.Router();
 
 const verifyToken = (req, res, next) => {
   const token = req.header("Authorization");
@@ -15,6 +15,7 @@ const verifyToken = (req, res, next) => {
     res.status(400).json({ message: "Token no válido." });
   }
 };
+
 
 router.post("/store", verifyToken, async (req, res) => {
   const { name, price, category, stock, image } = req.body;
@@ -47,6 +48,7 @@ router.get("/store/:id", async (req, res) => {
   }
 });
 
+// Actualizar un producto por ID (protegido)
 router.put("/store/:id", verifyToken, async (req, res) => {
   const { id } = req.params;
   const { name, price, category, stock, image } = req.body;
@@ -63,6 +65,7 @@ router.put("/store/:id", verifyToken, async (req, res) => {
   }
 });
 
+
 router.delete("/store/:id", verifyToken, async (req, res) => {
   const { id } = req.params;
   try {
@@ -75,7 +78,7 @@ router.delete("/store/:id", verifyToken, async (req, res) => {
 });
 
 
-router.get("/search", async (req, res) => {
+router.get("/nav", async (req, res) => {
   const { query } = req.query;
   try {
     const products = await Product.find({
@@ -86,9 +89,11 @@ router.get("/search", async (req, res) => {
     });
     res.status(200).json(products);
   } catch (err) {
+    console.error("Error en la búsqueda:", err);
     res.status(500).json({ message: "Error al buscar productos." });
   }
 });
 
 module.exports = router;
+
 

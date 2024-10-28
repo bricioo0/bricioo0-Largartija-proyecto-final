@@ -7,6 +7,7 @@ import Usuario from "../../img/usuario.png";
 import "./estilo/Acceso.css";
 
 function Acceso() {
+   
     const [correo, setCorreo] = useState("");
     const [contrasena, setContrasena] = useState("");
     const [mensajeError, setMensajeError] = useState("");
@@ -18,7 +19,7 @@ function Acceso() {
         setMensajeError(''); 
     
         try {
-            
+
             const response = await fetch('http://localhost:3000/api/acceso', {
                 method: 'POST',
                 headers: {

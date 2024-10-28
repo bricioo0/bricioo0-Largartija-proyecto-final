@@ -5,3 +5,29 @@ a{
     color: white;
     text-decoration: none;
 }
+
+.search-results {
+    margin-top: 10px;
+    max-height: 200px;
+    overflow-y: auto;
+    background-color: white;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    position: absolute;
+    width: 40%;
+  }
+  
+  .search-results li {
+    padding: 5px 0;
+  }
+  
+  .search-results li a {
+    text-decoration: none;
+    color: #333;
+  }
+  
+  .search-results li a:hover {
+    color: #007bff;
+  }
+  

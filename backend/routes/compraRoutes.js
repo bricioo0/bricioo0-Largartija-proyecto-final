@@ -2,26 +2,25 @@ const express = require('express');
 const router = express.Router();
 const MercadoPago = require('mercadopago');
 const jwt = require('jsonwebtoken');
+const verifyToken = require('../middlewares/authMiddleware'); 
 
-// Configuración de MercadoPago
+
 MercadoPago.configure({
   access_token: process.env.MERCADOPAGO_ACCESS_TOKEN,
 });
 
-// Validar stock y productos antes de realizar la compra
-router.post('/compra', async (req, res) => {
+router.post('/compra', verifyToken, async (req, res) => {
   const { productos, total, metodoPago } = req.body;
 
   if (!productos || productos.length === 0 || !metodoPago) {
     return res.status(400).json({ success: false, message: 'Datos incompletos' });
   }
-
   try {
-    // Verificación de stock (puedes agregar esta lógica si la manejas en tu base de datos)
+
 
     let paymentUrl = '';
 
-    // Manejar el pago según el método seleccionado
+
     if (metodoPago === 'MercadoPago') {
       const preference = {
         items: productos.map((item) => ({
@@ -37,12 +36,10 @@ router.post('/compra', async (req, res) => {
         auto_return: 'approved',
       };
       const response = await MercadoPago.preferences.create(preference);
-      paymentUrl = response.body.init_point; // URL para redirigir al pago en MercadoPago
+      paymentUrl = response.body.init_point; 
     }
 
-    // Puedes agregar más lógica aquí para manejar otros métodos de pago
 
-    // Enviar la URL de la pasarela de pago
     res.status(200).json({ success: true, paymentUrl });
   } catch (error) {
     console.error('Error en el proceso de pago:', error);
