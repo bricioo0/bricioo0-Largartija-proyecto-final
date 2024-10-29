@@ -1,23 +1,20 @@
-import React, { useState } from 'react';
+import React, { useState } from 'react'; 
 import { useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+
 import { Button, Select, MenuItem, Typography, Box } from '@mui/material';
 import './estilos/compras.css';
 
 function Checkout() {
-  const cart = useSelector((state) => state.cart);  
+  const cart = useSelector((state) => state.cart);
   const [metodoPago, setMetodoPago] = useState('');
   const [compraConfirmada, setCompraConfirmada] = useState(false);
- 
 
 
-  const totalAmount = cart.items.reduce((total, item) => total + item.price * item.quantity, 0);
+  const totalAmount = (cart.items || []).reduce((acc, item) => acc + item.price * item.quantity, 0);
 
- 
   const handleMetodoPagoChange = (e) => {
     setMetodoPago(e.target.value);
   };
-
 
   const handleConfirmarCompra = async () => {
     const data = {
@@ -27,7 +24,6 @@ function Checkout() {
     };
 
     try {
-      
       const response = await fetch('http://localhost:3001/api/compra', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -37,7 +33,6 @@ function Checkout() {
       const result = await response.json();
 
       if (result.success) {
-      
         setCompraConfirmada(true);
       } else {
         alert('Error al procesar la compra');
@@ -48,29 +43,34 @@ function Checkout() {
   };
 
 
-  const renderCompraConfirmada = () => (
-    <Box className="compra-confirmada">
-      <Typography variant="h5" color="primary">Compra Confirmada</Typography>
-      <Typography variant="body1">Gracias por tu compra. Puedes ver tu compra en el historial de pedidos o en tu perfil.</Typography>
-    </Box>
-  );
+    const renderCompraConfirmada = () => (
+      <Box className="compra-confirmada">
+        <Typography variant="h5" color="primary">Compra Confirmada</Typography>
+        <Typography variant="body1">Gracias por tu compra. Puedes ver tu compra en el historial de pedidos o en tu perfil.</Typography>
+        <Typography variant="body1">Total: ${totalAmount}</Typography> 
+      </Box>
+    );
+  
 
   return (
     <div className="container">
       <Typography variant="h4" className="title">Proceso de pago</Typography>
 
-  
-      <ul>
-        {cart.items.map((item) => (
-          <li key={item.id}>
-            {item.name} - Cantidad: {item.quantity} - Precio: ${item.price}
-          </li>
-        ))}
-      </ul>
+      {cart.items && cart.items.length > 0 ? (
+        <ul>
+          {cart.items.map((item) => (
+            <li key={item.id}>
+              {item.name} - Cantidad: {item.quantity} - Precio: ${item.price}
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <Typography variant="h6">Tu carrito está vacío.</Typography>
+      )}
+
 
       <Typography variant="h6" className="total">Total: ${totalAmount}</Typography>
 
-     
       <Typography variant="h6">Selecciona el método de pago</Typography>
       <Select value={metodoPago} onChange={handleMetodoPagoChange}>
         <MenuItem value="MercadoPago">MercadoPago</MenuItem>
@@ -79,19 +79,15 @@ function Checkout() {
         <MenuItem value="CuentaDNI">Cuenta DNI</MenuItem>
       </Select>
 
-    
       <Button 
         variant="contained" 
         color="primary" 
         onClick={handleConfirmarCompra} 
         disabled={!metodoPago}  
       >
-        <Link to="/carrito">
         Confirmar compra
-        </Link>
       </Button>
 
-     
       {compraConfirmada && renderCompraConfirmada()}
     </div>
   );

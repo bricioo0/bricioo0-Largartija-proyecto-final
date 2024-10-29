@@ -1,12 +1,12 @@
-import React from 'react';
+import React from 'react'; 
 import { useSelector, useDispatch } from 'react-redux';
-import { removeFromCart, updateQuantity } from '../../redux/cartSlice';
+import { removeFromCart, updateQuantity, updateSize } from '../../redux/cartSlice'; // Asegúrate de tener esta acción
 import { Button, Typography, Select, MenuItem } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
-import './estilos/compras.css'; // Asegúrate de importar el CSS
+import './estilos/compras.css';
 
 function Carrito() {
-  const cart = useSelector((state) => state.cart);
+  const cart = useSelector((state) => state.cart) || { items: [] };
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -18,9 +18,15 @@ function Carrito() {
     dispatch(updateQuantity({ id, quantity }));
   };
 
-  const handleCheckout = () => {
-    navigate('/checkout'); // Redirigir al proceso de pago
+  const handleUpdateSize = (id, size) => {
+    dispatch(updateSize({ id, size }));
   };
+
+  const handleChekout = () => {
+    navigate('/chekout'); 
+  };
+
+  const total = cart.items.reduce((sum, item) => sum + item.price * item.quantity, 0); // Calcular total
 
   return (
     <div className="container">
@@ -34,7 +40,7 @@ function Carrito() {
               <div className="item-info">
                 <Typography variant="h6">{item.name}</Typography>
                 <Typography variant="body1">Talla: {item.talla}</Typography>
-                <Typography variant="body1" className="item-price">Precio: ${item.price}</Typography>
+                <Typography variant="body1" className="item-price">Precio: ${item.price} x {item.quantity}</Typography>
               </div>
               <div className="item-actions">
                 <Select
@@ -45,12 +51,23 @@ function Carrito() {
                     <MenuItem key={q} value={q}>{q}</MenuItem>
                   ))}
                 </Select>
+                <Select
+                  value={item.talla}
+                  onChange={(e) => handleUpdateSize(item.id, e.target.value)}
+                >
+                  {['S', 'M', 'L', 'XL'].map((size) => (
+                    <MenuItem key={size} value={size}>{size}</MenuItem>
+                  ))}
+                </Select>
                 <Button onClick={() => handleRemove(item.id)}>Eliminar</Button>
               </div>
             </div>
           ))}
+          <div className="total">
+            <Typography variant="h6">Total: ${total}</Typography>
+          </div>
           <div className="checkout">
-            <Button variant="contained" color="primary" onClick={handleCheckout}>
+            <Button variant="contained" color="primary" onClick={handleChekout}>
               Proceder al pago
             </Button>
           </div>
@@ -61,3 +78,4 @@ function Carrito() {
 }
 
 export default Carrito;
+

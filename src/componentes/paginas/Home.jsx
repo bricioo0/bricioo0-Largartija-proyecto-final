@@ -9,6 +9,7 @@ import Logo from  '../../img/icons8-mercado-pago-48.png'
 import Dni from  '../../img/Banco Provincia Cuenta DNI.png'
 import Debito from  '../../img/pngwing.com.png'
 import { Link } from 'react-router-dom';
+import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart'
 
 function Home() {
   const products = useSelector(state => state.products.products);  
@@ -93,6 +94,12 @@ function Home() {
                     disabled={!product.stock}
                   >
                     Comprar
+                  </Button>
+                  <Button>
+                  <div className="add-to-cart-icon">
+    <AddShoppingCartIcon style={{ fontSize: 20 }} />
+    <Typography variant="body2">Agregar al carrito</Typography>
+  </div>
                   </Button>
                 </CardContent>
               </Card>

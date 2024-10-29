@@ -1,39 +1,37 @@
 import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { Grid, Card, CardContent, CardMedia, Typography, Button, Modal, Box } from '@mui/material';
-import "./estilos/buzos.css"  
-import "./estilos/modal.css"
+import "./estilos/buzos.css";  
+import "./estilos/modal.css";
 import Nav from '../estructura/Nav';
 import Footer from '../estructura/Footer';
-import Logo from  '../../img/icons8-mercado-pago-48.png'
-import Dni from  '../../img/Banco Provincia Cuenta DNI.png'
-import Debito from  '../../img/pngwing.com.png'
+import Logo from  '../../img/icons8-mercado-pago-48.png';
+import Dni from  '../../img/Banco Provincia Cuenta DNI.png';
+import Debito from  '../../img/pngwing.com.png';
 import { Link } from 'react-router-dom';
+import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
+import { addToCart } from '../../redux/cartSlice';
 
 function Buzos() {
   const products = useSelector((state) => state.products.products);
   const buzos = products ? products.filter(product => product.category === 'buzos') : [];
+  const dispatch = useDispatch();
 
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [open, setOpen] = useState(false);
   const [cantidad, setCantidad] = useState(1);
   const [tallaSeleccionada, setTallaSeleccionada] = useState('');
-  const [modalClass, setModalClass] = useState("");
 
   const handleOpen = (product) => {
     setSelectedProduct(product);
     setCantidad(1);  
     setTallaSeleccionada('');  
-    setModalClass("")
     setOpen(true);
   };
 
   const handleClose = () => {
-    setModalClass("modal-exit")
-    setTimeout(() => {
-      setOpen(false);
-      setSelectedProduct(null);
-    }, 300);
+    setOpen(false);
+    setSelectedProduct(null);
   }; 
 
   const incrementarCantidad = () => {
@@ -46,6 +44,10 @@ function Buzos() {
 
   const seleccionarTalla = (talla) => {
     setTallaSeleccionada(talla);
+  };
+
+  const agregarCarrito = (product) => {
+    dispatch(addToCart({ ...product, cantidad, talla: tallaSeleccionada }));
   };
 
   return (
@@ -74,8 +76,8 @@ function Buzos() {
                     ${product.price}
                   </Typography>
                   <Typography variant="body2" color={product.stock > 0 ? "green" : "red"} className="product-stock">
-                   {product.stock > 0 ? `En stock: ${product.stock}` : "Sin stock"}
-                   </Typography>
+                    {product.stock > 0 ? `En stock: ${product.stock}` : "Sin stock"}
+                  </Typography>
                   <Button
                     variant="contained"
                     color="primary"
@@ -85,6 +87,12 @@ function Buzos() {
                     disabled={!product.stock}
                   >
                     Comprar
+                  </Button>
+                  <Button onClick={() => agregarCarrito(product)}>
+                    <div className="add-to-cart-icon">
+                      <AddShoppingCartIcon style={{ fontSize: 20 }} />
+                      <Typography variant="body2">Agregar al carrito</Typography>
+                    </div>
                   </Button>
                 </CardContent>
               </Card>
@@ -99,7 +107,7 @@ function Buzos() {
 
       {selectedProduct && (
         <Modal open={open} onClose={handleClose}>
-          <Box className={`modal-box ${modalClass}`}>
+          <Box className="modal-box">
             <div className="modal-content">
               <img
                 src={`/img/${selectedProduct.image}`}
@@ -111,16 +119,12 @@ function Buzos() {
                 <Typography variant="h6" color="text.secondary">
                   ${selectedProduct.price}
                 </Typography>
-
-                <Typography variant="h6" color="text.secondary">
-                  Métodos de pago
-                </Typography>
+                <Typography variant="h6" color="text.secondary">Métodos de pago</Typography>
                 <div className="metodos-pago">
-                <img src={Logo} alt="Mercado Pago" />
+                  <img src={Logo} alt="Mercado Pago" />
                   <img src={Dni} alt="Cuenta DNI" />
                   <img src={Debito} alt="Débito" />
                 </div>
-
                 <div className="modal-options">
                   <Typography>Talles:</Typography>
                   {['L', 'XL', 'XXL'].map((talla) => (
@@ -134,18 +138,14 @@ function Buzos() {
                     </Button>
                   ))}
                 </div>
-
                 <div className="modal-quantity">
                   <Typography>Cantidad:</Typography>
                   <Button onClick={decrementarCantidad}>-</Button>
                   <input type="text" value={cantidad} readOnly />
                   <Button onClick={incrementarCantidad}>+</Button>
                 </div>
-
                 <Button variant="contained" color="primary" className="buy-now-btn">
-                <Link to="/chekout">
-                  Comprar ahora
-                  </Link>
+                  <Link to="/chekout">Comprar ahora</Link>
                 </Button>
               </div>
             </div>
@@ -158,3 +158,4 @@ function Buzos() {
 }
 
 export default Buzos;
+

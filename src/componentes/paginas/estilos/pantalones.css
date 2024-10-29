@@ -72,5 +72,15 @@
     color: #999;
     font-size: 1.2rem;
   }
+  .add-to-cart-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .add-to-cart-icon .MuiSvgIcon-root {
+    margin-right: 5px; 
+  }
+  
   
   

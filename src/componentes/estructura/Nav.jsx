@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import Logo from "../../img/logo-lagartija.png";
 import Carrito from "../../img/carrito-de-compras.png";
-import { setSearchQuery } from '../redux/productSlice';
+import { setSearchQuery } from '../../redux/productSlice';
 import "./estilo/nav.css";
 
 const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:3000/api';

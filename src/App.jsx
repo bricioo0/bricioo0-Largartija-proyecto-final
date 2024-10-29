@@ -11,7 +11,10 @@ import Zapatillas from './componentes/paginas/zapatillas';
 import Carrito from  './componentes/paginas/Carrito';
 import ProductManagement from './componentes/paginas/productMangament';
 import Chekout from './componentes/paginas/Chekout';
-import SearchBar from './componentes/paginas/searchBar';
+
+
+
+
 
 
 
@@ -31,7 +34,12 @@ function App() {
         <Route path="/carrito" element={<Carrito/>} />
         <Route path="/productMangament" element={<ProductManagement/>} />
         <Route path="/chekout" element={<Chekout />} />
-        <Route path="/searchBar" element={<SearchBar />} />
+       
+
+
+
+
+
 
         
         

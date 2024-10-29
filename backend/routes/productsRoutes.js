@@ -78,13 +78,13 @@ router.delete("/store/:id", verifyToken, async (req, res) => {
 });
 
 
-router.get("/nav", async (req, res) => {
-  const { query } = req.query;
+router.get("/search", async (req, res) => {
+  const { name } = req.name;
   try {
     const products = await Product.find({
       $or: [
-        { name: { $regex: query, $options: "i" } },
-        { category: { $regex: query, $options: "i" } },
+        { name: { $regex: name, $options: "i" } },
+        { category: { $regex: name, $options: "i" } },
       ],
     });
     res.status(200).json(products);

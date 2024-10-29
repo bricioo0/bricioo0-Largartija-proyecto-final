@@ -129,3 +129,12 @@
     margin-right: 10px;
   }
   
+  .add-to-cart-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .add-to-cart-icon .MuiSvgIcon-root {
+    margin-right: 5px; 
+  }

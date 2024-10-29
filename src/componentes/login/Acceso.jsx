@@ -79,14 +79,14 @@ function Acceso() {
                             />
                         </div>
                         {mensajeError && <p className="text-danger">{mensajeError}</p>}
-                        <button type="submit" className='button1 mb-2 px-4 py-2 rounded-pill w-100 text-light border-0'>Continuar</button>
+                        <button type="submit" className='button1 mb-2 px-4 py-2 rounded-pill w-100 text-light border-0'><Link to="/Home">Continuar</Link></button>
                     </form>
                     <div className='row row-cols-2'>
                         <div className='col'>
                             <Link to="/recuperar-contrasena" className="text-primary">Olvidé mi contraseña</Link>
                         </div>
                         <div className='col'>
-                            <Link  to="/Home" className='button2 px-4 py-2 rounded-pill w-100 text-light border-0'>Crear cuenta</Link>
+                            <Link  to="/" className='button2 px-4 py-2 rounded-pill w-100 text-light border-0'>Crear cuenta</Link>
                         </div>
                     </div>
                 </div>

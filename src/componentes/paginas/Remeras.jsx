@@ -1,20 +1,21 @@
 import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { Grid, Card, CardContent, CardMedia, Typography, Button, Modal, Box } from '@mui/material';
-import "./estilos/remeras.css"
-import "./estilos/modal.css"
+import "./estilos/remeras.css";
+import "./estilos/modal.css";
 import Nav from '../estructura/Nav';
 import Footer from '../estructura/Footer';
-import Logo from  '../../img/icons8-mercado-pago-48.png'
-import Dni from  '../../img/Banco Provincia Cuenta DNI.png'
-import Debito from  '../../img/pngwing.com.png'
+import Logo from  '../../img/icons8-mercado-pago-48.png';
+import Dni from  '../../img/Banco Provincia Cuenta DNI.png';
+import Debito from  '../../img/pngwing.com.png';
 import { Link } from 'react-router-dom';
-
-
+import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
+import { addToCart } from '../../redux/cartSlice';
 
 function Remeras() {
   const products = useSelector((state) => state.products.products);
   const remeras = products ? products.filter(product => product.category === 'remeras') : [];
+  const dispatch = useDispatch();
 
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [open, setOpen] = useState(false);
@@ -45,9 +46,13 @@ function Remeras() {
     setTallaSeleccionada(talla);
   };
 
+  const agregarCarrito = (product) => {
+    dispatch(addToCart({ ...product, cantidad, talla: tallaSeleccionada }));
+  };
+
   return (
     <div className="remeras-container">
-      <Nav/>
+      <Nav />
       <Typography variant="h3" component="h1" className="title">
         Nuestras Remeras
       </Typography>
@@ -71,7 +76,7 @@ function Remeras() {
                     ${product.price}
                   </Typography>
                   <Typography variant="body2" color={product.stock > 0 ? "green" : "red"} className="product-stock">
-                  {product.stock > 0 ? `En stock: ${product.stock}` : "Sin stock"}
+                    {product.stock > 0 ? `En stock: ${product.stock}` : "Sin stock"}
                   </Typography>
                   <Button
                     variant="contained"
@@ -82,6 +87,12 @@ function Remeras() {
                     disabled={!product.stock}
                   >
                     Comprar
+                  </Button>
+                  <Button onClick={() => agregarCarrito(product)}>
+                    <div className="add-to-cart-icon">
+                      <AddShoppingCartIcon style={{ fontSize: 20 }} />
+                      <Typography variant="body2">Agregar al carrito</Typography>
+                    </div>
                   </Button>
                 </CardContent>
               </Card>
@@ -94,7 +105,6 @@ function Remeras() {
         )}
       </Grid>
 
-    
       {selectedProduct && (
         <Modal open={open} onClose={handleClose}>
           <Box className="modal-box">
@@ -109,20 +119,15 @@ function Remeras() {
                 <Typography variant="h6" color="text.secondary">
                   ${selectedProduct.price}
                 </Typography>
-
-                
-                <Typography variant="h6" color="text.secondary">
-                  Métodos de pago
-                </Typography>
+                <Typography variant="h6" color="text.secondary">Métodos de pago</Typography>
                 <div className="metodos-pago">
-                <img src={Logo} alt="Mercado Pago" />
+                  <img src={Logo} alt="Mercado Pago" />
                   <img src={Dni} alt="Cuenta DNI" />
                   <img src={Debito} alt="Débito" />
                 </div>
-
                 <div className="modal-options">
                   <Typography>Talles:</Typography>
-                  {['L', 'XL', 'XXL'].map((talla) => (
+                  {['S', 'M', 'L', 'XL'].map((talla) => (
                     <Button
                       key={talla}
                       variant="outlined"
@@ -133,29 +138,23 @@ function Remeras() {
                     </Button>
                   ))}
                 </div>
-
-                
                 <div className="modal-quantity">
                   <Typography>Cantidad:</Typography>
                   <Button onClick={decrementarCantidad}>-</Button>
                   <input type="text" value={cantidad} readOnly />
                   <Button onClick={incrementarCantidad}>+</Button>
                 </div>
-
                 <Button variant="contained" color="primary" className="buy-now-btn">
-                <Link to="/chekout">
-                  Comprar ahora
-                  </Link>
+                  <Link to="/chekout">Comprar ahora</Link>
                 </Button>
               </div>
             </div>
           </Box>
         </Modal>
       )}
-      <Footer/>
+      <Footer />
     </div>
   );
 }
 
 export default Remeras;
-

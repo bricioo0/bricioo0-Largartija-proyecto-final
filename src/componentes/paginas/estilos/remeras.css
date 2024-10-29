@@ -129,3 +129,13 @@
   .buy-now-btn:hover {
     background-color: #1f7a68;
   }
+
+  .add-to-cart-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .add-to-cart-icon .MuiSvgIcon-root {
+    margin-right: 5px; 
+  }
