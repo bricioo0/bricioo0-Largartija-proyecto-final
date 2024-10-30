@@ -5,16 +5,16 @@ import Footer from '../estructura/Footer';
 import Nav from '../estructura/Nav';
 import BannerGeneral from "../../img/banner-general.png";
 import "./estilos/modal.css";  
-import Logo from  '../../img/icons8-mercado-pago-48.png'
-import Dni from  '../../img/Banco Provincia Cuenta DNI.png'
-import Debito from  '../../img/pngwing.com.png'
+import Logo from  '../../img/icons8-mercado-pago-48.png';
+import Dni from  '../../img/Banco Provincia Cuenta DNI.png';
+import Debito from  '../../img/pngwing.com.png';
 import { Link } from 'react-router-dom';
-import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart'
+import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
+import { addToCart } from '../../redux/cartSlice'; // Asegúrate de importar la acción addToCart
 
 function Home() {
   const products = useSelector(state => state.products.products);  
   const dispatch = useDispatch();
-
 
   const offerProducts = products.filter(product => product.discount < product.price);
 
@@ -52,8 +52,11 @@ function Home() {
     setTallaSeleccionada(talla);
   };
 
-  const handleAddToCart = (product) => {
-    dispatch({ type: 'ADD_TO_CART', payload: product });
+  const handleAddToCart = () => {
+    if (selectedProduct) {
+      dispatch(addToCart({ ...selectedProduct, cantidad, talla: tallaSeleccionada }));
+      handleClose(); // Cierra el modal después de agregar al carrito
+    }
   };
 
   return (
@@ -95,11 +98,11 @@ function Home() {
                   >
                     Comprar
                   </Button>
-                  <Button>
-                  <div className="add-to-cart-icon">
-    <AddShoppingCartIcon style={{ fontSize: 20 }} />
-    <Typography variant="body2">Agregar al carrito</Typography>
-  </div>
+                  <Button onClick={handleAddToCart} disabled={!product.stock}>
+                    <div className="add-to-cart-icon">
+                      <AddShoppingCartIcon style={{ fontSize: 20 }} />
+                      <Typography variant="body2">Agregar al carrito</Typography>
+                    </div>
                   </Button>
                 </CardContent>
               </Card>
@@ -112,7 +115,6 @@ function Home() {
         )}
       </Grid>
 
-      {/* Modal para mostrar detalles del producto seleccionado */}
       {selectedProduct && (
         <Modal open={open} onClose={handleClose}>
           <Box className={`modal-box ${modalClass}`}>
@@ -131,7 +133,7 @@ function Home() {
                   Métodos de pago
                 </Typography>
                 <div className="metodos-pago">
-                <img src={Logo} alt="Mercado Pago" />
+                  <img src={Logo} alt="Mercado Pago" />
                   <img src={Dni} alt="Cuenta DNI" />
                   <img src={Debito} alt="Débito" />
                 </div>
@@ -158,11 +160,9 @@ function Home() {
                   variant="contained" 
                   color="primary" 
                   className="buy-now-btn" 
-                  onClick={() => handleAddToCart(selectedProduct)}
+                  onClick={handleAddToCart}
                 >
-                  <Link to="/chekout">
                   Comprar ahora
-                  </Link>
                 </Button>
               </div>
             </div>
@@ -175,4 +175,3 @@ function Home() {
 }
 
 export default Home;
-

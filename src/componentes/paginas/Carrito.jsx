@@ -1,6 +1,6 @@
 import React from 'react'; 
 import { useSelector, useDispatch } from 'react-redux';
-import { removeFromCart, updateQuantity, updateSize } from '../../redux/cartSlice'; // Asegúrate de tener esta acción
+import { removeFromCart, updateQuantity, updateSize } from '../../redux/cartSlice'; //
 import { Button, Typography, Select, MenuItem } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import './estilos/compras.css';

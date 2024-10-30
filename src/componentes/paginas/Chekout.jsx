@@ -1,6 +1,6 @@
 import React, { useState } from 'react'; 
 import { useSelector } from 'react-redux';
-
+import { useNavigate} from 'react-router-dom';
 import { Button, Select, MenuItem, Typography, Box } from '@mui/material';
 import './estilos/compras.css';
 
@@ -8,6 +8,7 @@ function Checkout() {
   const cart = useSelector((state) => state.cart);
   const [metodoPago, setMetodoPago] = useState('');
   const [compraConfirmada, setCompraConfirmada] = useState(false);
+  const navigate = useNavigate();
 
 
   const totalAmount = (cart.items || []).reduce((acc, item) => acc + item.price * item.quantity, 0);
@@ -22,6 +23,7 @@ function Checkout() {
       total: totalAmount,  
       metodoPago,
     };
+    navigate('/gracias');
 
     try {
       const response = await fetch('http://localhost:3001/api/compra', {
