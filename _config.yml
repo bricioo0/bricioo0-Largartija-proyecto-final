@@ -1,0 +1,7 @@
+exclude:
+  - node_modules
+  - backend
+  - frontend
+  - .git
+  - src.zip
+  - backend.zip
