@@ -6,7 +6,6 @@ import Home from './componentes/paginas/Home';
 import RecuperarContrasena from './componentes/login/RecuperarContrasena';
 import Remeras from './componentes/paginas/Remeras';
 
-import Pantalones from './componentes/paginas/Pantalones';
 import Zapatillas from './componentes/paginas/zapatillas'
 import Carrito from  './componentes/paginas/Carrito';
 import ProductManagement from './componentes/paginas/productMangament';
@@ -30,7 +29,7 @@ function App() {
         <Route path="/recuperar-contrasena" element={<RecuperarContrasena />} />
         <Route path="/remeras" element={<Remeras />} />
        
-        <Route path="/pantalones" element={<Pantalones/>} />
+
         <Route path="/zapatillas" element={<Zapatillas/>} />
         <Route path="/carrito" element={<Carrito/>} />
         <Route path="/productMangament" element={<ProductManagement/>} />
