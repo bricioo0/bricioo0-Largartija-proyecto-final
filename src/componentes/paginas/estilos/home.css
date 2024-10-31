@@ -1,0 +1,17 @@
+.descuento{
+    color: #E76F51;
+}
+.home-image{
+    object-fit: cover;
+    width: 30%;  
+    height: 100px;  
+}
+.add-to-cart-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .add-to-cart-icon .MuiSvgIcon-root {
+    margin-right: 5px; 
+  }
