@@ -11,7 +11,7 @@ import Zapatillas from './componentes/paginas/zapatillas'
 import Carrito from  './componentes/paginas/Carrito';
 import ProductManagement from './componentes/paginas/productMangament';
 import Chekout from './componentes/paginas/Chekout';
-import Gracias from './componentes/paginas/Gracias';
+import Gracias from './componentes/paginas/Gracias'; 
 
 
 
