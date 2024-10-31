@@ -1,6 +1,7 @@
 {
   "name": "lagartija",
   "version": "0.1.0",
+  "homepage": "https://bricioo0.github.io/bricioo0-Largartija-proyecto-final/",
   "private": true,
   "dependencies": {
     "@emotion/react": "^11.13.3",
@@ -34,7 +35,10 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build" 
+
   },
   "eslintConfig": {
     "extends": [
@@ -57,6 +61,7 @@
   "devDependencies": {
     "@pmmmwh/react-refresh-webpack-plugin": "^0.5.15",
     "babel-loader": "^9.2.1",
+    "gh-pages": "^6.2.0",
     "html-webpack-plugin": "^5.6.3",
     "react-app-rewired": "^2.2.1",
     "webpack": "^5.95.0"
