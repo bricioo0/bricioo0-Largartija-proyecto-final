@@ -6,7 +6,7 @@ import Home from './componentes/paginas/Home';
 import RecuperarContrasena from './componentes/login/RecuperarContrasena';
 import Remeras from './componentes/paginas/Remeras';
 import Buzos from '@components/paginas/Buzos';
-import Pantalones from './componentes/paginas/Pantalones'
+import Pantalones from '@components/paginas/Pantalones';
 import Zapatillas from './componentes/paginas/zapatillas'
 import Carrito from  './componentes/paginas/Carrito';
 import ProductManagement from './componentes/paginas/productMangament';
