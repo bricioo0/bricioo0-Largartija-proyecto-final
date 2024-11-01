@@ -23,7 +23,10 @@ function Buzos() {
   const [tallaSeleccionada, setTallaSeleccionada] = useState('');
 
   const handleOpen = (product) => {
-    setSelectedProduct(product);
+    setSelectedProduct({
+      ...product,
+      price: parseFloat(product.price) || 0 // Convertir el precio a número y manejar el caso NaN
+    });
     setCantidad(1);  
     setTallaSeleccionada('');  
     setOpen(true);
@@ -32,7 +35,7 @@ function Buzos() {
   const handleClose = () => {
     setOpen(false);
     setSelectedProduct(null);
-  }; 
+  };
 
   const incrementarCantidad = () => {
     setCantidad(cantidad + 1);
@@ -47,7 +50,12 @@ function Buzos() {
   };
 
   const agregarCarrito = (product) => {
-    dispatch(addToCart({ ...product, cantidad, talla: tallaSeleccionada }));
+    const total = product.price * cantidad; // Asegurar que el precio se multiplica correctamente
+    if (!isNaN(total)) {
+      dispatch(addToCart({ ...product, cantidad, talla: tallaSeleccionada, total }));
+    } else {
+      console.error("El precio o cantidad no es un número válido.");
+    }
   };
 
   return (
@@ -158,4 +166,3 @@ function Buzos() {
 }
 
 export default Buzos;
-

@@ -1,6 +1,6 @@
 import React, { useState } from 'react'; 
 import { useSelector } from 'react-redux';
-import { useNavigate} from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { Button, Select, MenuItem, Typography, Box } from '@mui/material';
 import './estilos/compras.css';
 
@@ -10,8 +10,19 @@ function Checkout() {
   const [compraConfirmada, setCompraConfirmada] = useState(false);
   const navigate = useNavigate();
 
+  // Verificar y convertir a números en el cálculo del total
+  const totalAmount = (cart.items || []).reduce((acc, item) => {
+    const itemPrice = Number(item.price);
+    const itemQuantity = Number(item.quantity);
+    
+    // Verificar si los valores son válidos
+    if (isNaN(itemPrice) || isNaN(itemQuantity)) {
+      console.error(`Precio o cantidad inválida para el producto: ${item.name}`);
+      return acc;
+    }
 
-  const totalAmount = (cart.items || []).reduce((acc, item) => acc + item.price * item.quantity, 0);
+    return acc + itemPrice * itemQuantity;
+  }, 0);
 
   const handleMetodoPagoChange = (e) => {
     setMetodoPago(e.target.value);
@@ -20,9 +31,10 @@ function Checkout() {
   const handleConfirmarCompra = async () => {
     const data = {
       productos: cart.items,
-      total: totalAmount,  
+      total: totalAmount,
       metodoPago,
     };
+
     navigate('/gracias');
 
     try {
@@ -44,15 +56,13 @@ function Checkout() {
     }
   };
 
-
-    const renderCompraConfirmada = () => (
-      <Box className="compra-confirmada">
-        <Typography variant="h5" color="primary">Compra Confirmada</Typography>
-        <Typography variant="body1">Gracias por tu compra. Puedes ver tu compra en el historial de pedidos o en tu perfil.</Typography>
-        <Typography variant="body1">Total: ${totalAmount}</Typography> 
-      </Box>
-    );
-  
+  const renderCompraConfirmada = () => (
+    <Box className="compra-confirmada">
+      <Typography variant="h5" color="primary">Compra Confirmada</Typography>
+      <Typography variant="body1">Gracias por tu compra. Puedes ver tu compra en el historial de pedidos o en tu perfil.</Typography>
+      <Typography variant="body1">Total: ${totalAmount}</Typography> 
+    </Box>
+  );
 
   return (
     <div className="container">
@@ -69,7 +79,6 @@ function Checkout() {
       ) : (
         <Typography variant="h6">Tu carrito está vacío.</Typography>
       )}
-
 
       <Typography variant="h6" className="total">Total: ${totalAmount}</Typography>
 
