@@ -7,6 +7,7 @@ const authRoutes = require('./routes/authRoutes');
 const productRoutes = require('./routes/productRoutes');
 const compraRoutes = require('./routes/compraRoutes');
 const confirmacionRoutes = require('./routes/confirmacionRoutes');
+const suscriptionRoutes = require("./routes/suscriptionRoutes");
 
 dotenv.config();
 
@@ -24,6 +25,7 @@ app.use('/api', authRoutes);
 app.use('/api', productRoutes);
 app.use('/api', compraRoutes);
 app.use('/api', confirmacionRoutes); 
+app.use("/api", suscriptionRoutes)
 
 app.listen(PORT, () => {
   console.log(`Servidor corriendo en el puerto ${PORT}`);

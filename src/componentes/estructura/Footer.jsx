@@ -1,40 +1,91 @@
-import React from 'react'
-import "./estilo/footer.css"
+import React, { useState } from 'react';
+import "./estilo/footer.css";
 import Logo from "../../img/logo-lagartija.png";
 import { Link } from 'react-router-dom';
 
 function Footer() {
+  const [email, setEmail] = useState('');
+  const [message, setMessage] = useState('');
+
+  const handleSubscribe = async () => {
+    if (!email) {
+      setMessage("Por favor, ingresa un correo electrónico.");
+      return;
+    }
+
+    try {
+      const response = await fetch("https://bricioo0-largartija-proyecto-final.onrender.com//api/suscripciones", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ email })
+      });
+
+      if (response.ok) {
+        setMessage("¡Gracias por suscribirte!");
+        setEmail(''); 
+      } else {
+        setMessage("Hubo un error. Intenta nuevamente.");
+      }
+    } catch (error) {
+      setMessage("Error de conexión. Intenta nuevamente.");
+    }
+  };
+
   return (
-    <footer className='d-flex justify-content-between align-items-center text-light px-5'>
-      <div>
-        <img className='m-2' src={Logo} width="200px" alt="Lagartija - Logo" />
+    <footer className='d-flex flex-wrap justify-content-between align-items-start text-light p-5' style={{ backgroundColor: "#333" }}>
+      <div className='footer-logo'>
+        <img src={Logo} width="180px" alt="Lagartija - Logo" />
+        <p className='mt-3'>Descubre estilo y calidad en un solo lugar. ¡Gracias por confiar en Lagartija!</p>
       </div>
-      <div className='d-flex justify-content-between gap-5'>
+
+      <div className='footer-links d-flex gap-5'>
         <div>
-          <h5>Tienda</h5>
+          <h5 className="mb-3">Tienda</h5>
           <ul>
-            <li><a href="#">Remeras</a></li>
-            <li><a href="#">Pantalones</a></li>
-            <li><a href="#">Zapatillas</a></li>
-            <li><a href="#">Buzos</a></li>
-          </ul>
-        </div>
-        <div>
-          <h5>Nuestra tienda</h5>
-          <ul>
-            <li><a href="#">Contacto</a></li>
-            <li><a href="#">Politicas</a></li>
-            <li><Link to= "/productMangament">envios y devoluciones</Link></li>
+            <li><Link to="/remeras">Remeras</Link></li>
+            <li><Link to="/pantalones">Pantalones</Link></li>
+            <li><Link to="/zapatillas">Zapatillas</Link></li>
+            <li><Link to="/buzos">Buzos</Link></li>
           </ul>
         </div>
       </div>
-      <div>
-        <h5 className='text-center'>Suscripcion a la tienda</h5>
-        <input className="form-control me-2 my-2" type="suscrib" placeholder="Email" aria-label="suscrib"/>
-        <button className='px-4 py-2 rounded-pill w-100 text-light border-0'>Suscribete</button>
+
+      <div className='footer-social'>
+        <h5 className='text-center mb-3'>Síguenos en redes sociales</h5>
+        <div className='d-flex gap-3 justify-content-center'>
+          <a href="https://www.instagram.com/tu_instagram" target="_blank" rel="noopener noreferrer">
+            <i className="fab fa-instagram fa-lg text-light"></i> Instagram
+          </a>
+          <a href="https://www.linkedin.com/in/bricio-matos-759bb628b/" target="_blank" rel="noopener noreferrer">
+            <i className="fab fa-linkedin fa-lg text-light"></i> LinkedIn
+          </a>
+          <a href="https://x.com/briciopincha" target="_blank" rel="noopener noreferrer">
+            <i className="fab fa-twitter fa-lg text-light"></i> Twitter
+          </a>
+        </div>
+
+        <h5 className='text-center mt-4'>Suscríbete a nuestra tienda</h5>
+        <input 
+          className="form-control my-2" 
+          type="email" 
+          placeholder="Email" 
+          value={email} 
+          onChange={(e) => setEmail(e.target.value)} 
+          aria-label="suscrib"
+        />
+        <button 
+          className='btn btn-primary w-100 rounded-pill' 
+          onClick={handleSubscribe}
+        >
+          Suscribirme
+        </button>
+        {message && <p className='mt-2 text-center'>{message}</p>}
       </div>
     </footer>
-  )
+  );
 }
 
-export default Footer
+export default Footer;
+
