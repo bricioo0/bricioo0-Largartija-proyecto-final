@@ -7,3 +7,10 @@
 .button3{
     background-color: #E76F51;
 }
+
+@media (max-width: 768px) {
+    .d-flex {
+        flex-direction: column;
+        padding: 10px;
+    }
+}

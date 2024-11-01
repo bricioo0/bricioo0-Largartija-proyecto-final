@@ -4,3 +4,15 @@ footer{
 button{
     background-color: #E76F51;
 }
+.grid-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  
+  @media (min-width: 768px) {
+    .grid-container {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  

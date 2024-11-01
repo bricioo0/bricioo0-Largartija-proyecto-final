@@ -138,3 +138,24 @@
   .add-to-cart-icon .MuiSvgIcon-root {
     margin-right: 5px; 
   }
+ 
+  @media (max-width: 768px) {
+    .grid-item {
+      flex: 0 0 100%; 
+      max-width: 100%;
+    }
+  
+    .title {
+      font-size: 1.5rem;
+    }
+  
+    .buy-btn,
+    .add-to-cart-icon {
+      flex-direction: column; 
+    }
+  
+    .add-to-cart-icon {
+      align-items: center;
+    }
+  }
+  

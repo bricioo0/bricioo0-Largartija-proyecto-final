@@ -81,6 +81,13 @@
   .add-to-cart-icon .MuiSvgIcon-root {
     margin-right: 5px; 
   }
+ 
+
+@media (max-width: 768px) {
+  .grid-item {
+      width: 100%;}
+}
+
   
   
   

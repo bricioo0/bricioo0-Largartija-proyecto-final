@@ -139,3 +139,56 @@
   .add-to-cart-icon .MuiSvgIcon-root {
     margin-right: 5px; 
   }
+
+.remeras-container {
+  padding: 20px;
+}
+
+
+.title {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.grid-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around; 
+}
+
+
+.grid-item {
+  margin-bottom: 20px;
+  width: 100%; 
+  max-width: 300px; 
+}
+
+
+.product-card {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  overflow: hidden;
+  transition: transform 0.3s; /* Animación al pasar el ratón */
+}
+
+.product-card:hover {
+  transform: scale(1.05); /* Aumenta un poco el tamaño al pasar el ratón */
+}
+
+/* Imagen del producto */
+.product-image {
+  width: 100%; /* Asegura que la imagen ocupe todo el ancho */
+  height: auto; /* Mantiene la proporción de la imagen */
+}
+
+/* Botones */
+.buy-btn, .add-to-cart-icon {
+  width: 100%; /* Botones ocupan todo el ancho */
+}
+
+/* Responsividad */
+@media (max-width: 768px) {
+  .grid-item {
+      width: 100%; /* En móviles, los elementos ocupan el 100% */
+  }
+}

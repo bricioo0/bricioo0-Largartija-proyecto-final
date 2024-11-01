@@ -55,3 +55,8 @@
     color: #009688;
     text-decoration: none;
 }
+@media (max-width: 768px) {
+    .recuperar-contra-card {
+        width: 90%; 
+    }
+}

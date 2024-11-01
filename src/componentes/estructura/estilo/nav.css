@@ -30,4 +30,39 @@ a{
   .search-results li a:hover {
     color: #007bff;
   }
+
+  
+  
+  
+  @media (max-width: 768px) {
+    .d-flex {
+      flex-direction: column;
+    }
+  
+    .w-50 {
+      width: 100%;
+    }
+  
+    .search-results {
+      width: calc(100% - 20px); /* Ajustar según el padding */
+    }
+  
+    .flex-row {
+      flex-direction: column;
+      align-items: center;
+    }
+  
+    .gap-4 {
+      gap: 10px;
+    }
+  
+    .m-2 {
+      margin: 5px;
+    }
+  
+    img {
+      width: 40px; /* Ajustar tamaño de íconos */
+    }
+  }
+  
   
